@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bau-GmbH Deluxe</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🏗️ Minecraft Bau-GmbH Deluxe</h1>
+    <nav>
+      <a href="#auftrag">📝 Auftrag</a>
+      <a href="#arbeiter">👷 Arbeiter</a>
+      <a href="#kontakt">📞 Kontakt</a>
+    </nav>
+  </header>
+  <main>
+    <section id="auftrag">
+      <h2>Haus bestellen</h2>
+      <form>
+        <label>Dein Minecraft-Name:<br><input type="text" name="name" required></label><br>
+        <label>Was möchtest du bauen lassen?<br><textarea name="auftrag" rows="4" required></textarea></label><br>
+        <label>Stil:
+          <select name="stil">
+            <option>Modern</option>
+            <option>Mittelalterlich</option>
+            <option>Fantasy</option>
+          </select>
+        </label><br>
+        <button type="submit">Auftrag absenden</button>
+      </form>
+    </section>
+
+    <section id="arbeiter">
+      <h2>Arbeiter anheuern</h2>
+      <div class="arbeiter-card">
+        <h3>👷 SteveCraft</h3>
+        <p>🟢 Verfügbar – Spezialisiert auf Villen</p>
+        <button>Anheuern</button>
+      </div>
+      <div class="arbeiter-card">
+        <h3>👷 AlexBuilds</h3>
+        <p>🔴 Momentan beschäftigt – Modern & Städtebau</p>
+        <button disabled>Anheuern</button>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <h2>Kontakt & Fragen</h2>
+      <p>Schreib uns auf Discord oder fülle das Formular oben aus!</p>
+    </section>
+  </main>
+  <footer><p>&copy; 2025 Minecraft Bau-GmbH auf OPSUCHT.net</p></footer>
+</body>
+</html>
