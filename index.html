@@ -11,15 +11,16 @@
     }
 
     body {
-      background: #f9f9f9;
-      color: #333;
+      background: #121212;
+      color: #f1f1f1;
       line-height: 1.6;
     }
 
     header {
-      background: #0d6efd;
+      background: #1f1f1f;
       padding: 1.5rem 2rem;
-      color: white;
+      color: #ffc107;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
     }
 
     header h1 {
@@ -36,7 +37,7 @@
     .hero h2 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
 
     .hero p {
@@ -51,59 +52,63 @@
       font-size: 1rem;
       cursor: pointer;
       border-radius: 5px;
+      color: #000;
     }
 
     .services {
       padding: 3rem 2rem;
-      background: white;
+      background: #1e1e1e;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
     }
 
     .card {
-      background: #f1f1f1;
+      background: #2c2c2c;
       padding: 1.5rem;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       text-align: center;
     }
 
     .card h3 {
       margin-bottom: 1rem;
-      color: #0d6efd;
+      color: #ffc107;
     }
 
     .contact {
       padding: 2rem;
-      background: #eee;
+      background: #2b2b2b;
     }
 
     .contact h2 {
       text-align: center;
       margin-bottom: 1rem;
+      color: #ffc107;
     }
 
     form {
       max-width: 600px;
       margin: 0 auto;
-      background: white;
+      background: #1f1f1f;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    form input, form textarea {
+    form input, form textarea, form select {
       width: 100%;
       padding: 0.8rem;
       margin-bottom: 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
       border-radius: 5px;
+      background: #2c2c2c;
+      color: #f1f1f1;
     }
 
     form button {
-      background: #0d6efd;
-      color: white;
+      background: #ffc107;
+      color: #000;
       border: none;
       padding: 0.8rem 1.2rem;
       font-size: 1rem;
@@ -113,7 +118,7 @@
 
     .success {
       text-align: center;
-      color: green;
+      color: #0f0;
       margin-top: 1rem;
     }
   </style>
@@ -132,12 +137,12 @@
 
   <section class="services">
     <div class="card">
-      <h3>Rohbau</h3>
-      <p>Massive Bauweise mit höchster Qualität</p>
+      <h3>Arbeiter mieten</h3>
+      <p>Fachkräfte für Ihre Projekte flexibel verfügbar</p>
     </div>
     <div class="card">
-      <h3>Sanierung</h3>
-      <p>Altbau wird wie neu – mit Fachkompetenz</p>
+      <h3>Traumhaus kaufen</h3>
+      <p>Wählen Sie Ihr Wunschmodell und bestellen Sie direkt online</p>
     </div>
     <div class="card">
       <h3>Beratung</h3>
@@ -150,6 +155,11 @@
     <form id="contactForm">
       <input type="text" id="name" placeholder="Ihr Name" required>
       <input type="email" id="email" placeholder="Ihre E-Mail" required>
+      <select id="anfrage">
+        <option value="allgemein">Allgemeine Anfrage</option>
+        <option value="arbeiter">Arbeiter mieten</option>
+        <option value="haus">Traumhaus kaufen</option>
+      </select>
       <textarea id="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
       <button type="submit">Absenden</button>
       <p class="success" id="successMsg"></p>
@@ -159,17 +169,22 @@
   <script>
     const form = document.getElementById('contactForm');
     const successMsg = document.getElementById('successMsg');
-    const webhookURL = "https://discord.com/api/webhooks/1364968447988994068/2TJWcxzEwcSBzBeJxFOdbgDcQ2Fffc2GiO9IMQk7MXvbrmk0aPCD_-HKMbUXxpqssOlP"; // <-- hier deinen Discord Webhook einfügen
+    const webhookURL = "DEIN_DISCORD_WEBHOOK_LINK"; // <-- hier deinen Discord Webhook einfügen
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
+      const anfrage = document.getElementById('anfrage').value;
       const message = document.getElementById('message').value;
 
+      let title = "❓ Anfrage";
+      if (anfrage === "arbeiter") title = "👷 Arbeiter mieten";
+      if (anfrage === "haus") title = "🏠 Traumhaus kaufen";
+
       const discordPayload = {
-        content: `📩 **Neue Nachricht von der Website**\n👤 Name: ${name}\n📧 E-Mail: ${email}\n💬 Nachricht:\n${message}`
+        content: `${title}\n👤 Name: ${name}\n📧 E-Mail: ${email}\n💬 Nachricht:\n${message}`
       };
 
       fetch(webhookURL, {
